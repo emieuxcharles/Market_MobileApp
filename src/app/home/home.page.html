@@ -1,20 +1,67 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card *ngIf="!connected">
+    <ion-card-header>
+      <ion-card-title>Connect to Market</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Mail :</ion-label>
+        <ion-input type="email" [(ngModel)]="dataUser.email" placeholder="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password :</ion-label>
+        <ion-input type="password" [(ngModel)]="dataUser.password" placeholder="text"></ion-input>
+      </ion-item>
+      <br>
+      <ion-button expand="block" (click)="login()">Login</ion-button>
+      <br>
+      <ion-button color="tertiary" expand="block" (click)="signUp()">Sign Up</ion-button>
+    </ion-card-content>
+  </ion-card>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card *ngIf="connected">
+    <ion-card-header>
+      <ion-card-title>Hello {{connecterUserEmail}}</ion-card-title>
+      <ion-card-subtitle>Your UID : {{connectedUserUid}}</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <br><ion-button color="danger" expand="block" (click)="logout()">Logout</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="connected">
+    <ion-card-header>
+      <ion-card-subtitle>Test Inser into</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+    <ion-item>
+      <ion-label>Enter :</ion-label>
+      <ion-input [(ngModel)]="test" placeholder="text"></ion-input>
+    </ion-item>
+    <ion-button (click)="add(test)">test</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="connected">
+    <ion-card-header>
+      <ion-card-title>Your data:</ion-card-title>
+      <ion-card-subtitle>For user {{connecterUserEmail}}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item *ngFor="let item of items | async"><div *ngIf='item.fromUser == connectedUserUid'>{{ item.text | json }}</div></ion-item>
+    </ion-card-content>
+  </ion-card>
+  
 </ion-content>
