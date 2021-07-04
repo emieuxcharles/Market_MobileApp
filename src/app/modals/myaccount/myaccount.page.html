@@ -31,18 +31,18 @@
       <div class="creditcard">
         <i style="color: black; font-size:x-large;position: absolute;top: 0;left: 0; margin-left: 15px;margin-top: 10px;" class="fas fa-university"> Bank</i>
         <ion-item class="creditcardinput">
-          <ion-input type="number"placeholder="XXXX-XXXX-XXXX-XXXX"></ion-input>
+          <ion-input [(ngModel)]="cardNumber" type="number"placeholder="XXXX-XXXX-XXXX-XXXX"></ion-input>
         </ion-item>
 
         <ion-item class="creditcardinput date">
-          <ion-input type="number"placeholder="mm/AA"></ion-input>
+          <ion-input [(ngModel)]="cardExp" type="text"placeholder="mm/AA"></ion-input>
         </ion-item>
 
         <ion-item class="creditcardinput">
-          <ion-input type="text"placeholder="Jonh Doe"></ion-input>
+          <ion-input [(ngModel)]="cardName" type="text"placeholder="Jonh Doe"></ion-input>
         </ion-item>
       </div>
-      <ion-button style="margin-top: 10px;" expand="block" class="creditcardbtn" shape="" color="dark" fill="outline">Save &nbsp;<i class="far fa-save"></i></ion-button>
+      <ion-button (click)="addMyCard()" style="margin-top: 10px;" expand="block" class="creditcardbtn" shape="" color="dark" fill="outline">Save &nbsp;<i class="far fa-save"></i></ion-button>
     </ion-card-content>
   </ion-card>
 

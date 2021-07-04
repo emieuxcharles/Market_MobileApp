@@ -19,6 +19,9 @@ export class MyaccountPage implements OnInit {
   connectedUserUid: string;
   connected:boolean;
 
+  cardNumber;
+  cardExp;
+  cardName;
 
   constructor(public afDB: AngularFireDatabase, public afAuth: AngularFireAuth, public modalController: ModalController) {
     this.afAuth.authState.subscribe(auth => {
@@ -47,6 +50,16 @@ export class MyaccountPage implements OnInit {
   logout(){
     this.afAuth.signOut();
     this.modalController.dismiss();
+  }
+
+  addMyCard(){
+    this.afDB.list('Cards').push({
+      cardNumber: this.cardNumber,
+      cardExp: this.cardExp,
+      cardName: this.cardName,
+      cardOwner: this.connecterUserEmail,
+    });
+
   }
 
 
