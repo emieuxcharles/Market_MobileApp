@@ -3,6 +3,9 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { MyaccountPage } from '../modals/myaccount/myaccount.page';
+import { ModalController } from '@ionic/angular';
+
 
 
 @Component({
@@ -23,6 +26,8 @@ export class HomePage {
     password: ''
   };
 
+  dataReturned: any;
+
   connecterUserEmail: string;
   connectedUserUid: string;
 
@@ -30,7 +35,9 @@ export class HomePage {
 
   dataReceive;
 
-  constructor(public afDB: AngularFireDatabase, public afAuth: AngularFireAuth, public toastController: ToastController, db: AngularFireDatabase) {
+  connectedToMarket:boolean = true;
+
+  constructor(public modalController: ModalController, public afDB: AngularFireDatabase, public afAuth: AngularFireAuth, public toastController: ToastController, db: AngularFireDatabase) {
     this.afAuth.authState.subscribe(auth => {
       if (!auth) {
         console.log('non connecté');
@@ -52,6 +59,24 @@ export class HomePage {
       duration: 2000,
     });
     toast.present();
+  }
+
+  async myAccount() {
+    const modal = await this.modalController.create({
+      component: MyaccountPage,
+      componentProps: {
+        "currentmodal": 'myaccountmodal'
+      }
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
   }
 
   add(test) {
@@ -84,6 +109,20 @@ export class HomePage {
 
   logout(){
     this.afAuth.signOut();
+  }
+
+  connectToMarket(){
+    if (this.connectedToMarket == true){
+      this.connectedToMarket = false      
+    }else{
+      this.connectedToMarket = true
+    }
+  }
+
+  userFromMail(str:string){
+    var a = str.split('.')[1];
+    return a.charAt(0).toUpperCase() + a.slice(1);
+     
   }
 
   

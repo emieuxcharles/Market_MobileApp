@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'myaccount',
+    loadChildren: () => import('./modals/myaccount/myaccount.module').then( m => m.MyaccountPageModule)
+  },
 ];
 
 @NgModule({

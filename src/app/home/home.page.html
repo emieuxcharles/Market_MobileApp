@@ -6,7 +6,15 @@
   </ion-toolbar>
 </ion-header>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <ion-content [fullscreen]="true">
+
+
+
+
+
+
   <ion-card *ngIf="!connected">
     <ion-card-header>
       <ion-card-title>Connect to Market</ion-card-title>
@@ -15,30 +23,64 @@
     <ion-card-content>
       <ion-item>
         <ion-label>Mail :</ion-label>
-        <ion-input type="email" [(ngModel)]="dataUser.email" placeholder="text"></ion-input>
+        <ion-input type="email" [(ngModel)]="dataUser.email" placeholder="Your email here..."></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Password :</ion-label>
-        <ion-input type="password" [(ngModel)]="dataUser.password" placeholder="text"></ion-input>
+        <ion-input type="password" [(ngModel)]="dataUser.password" placeholder="...and your password"></ion-input>
       </ion-item>
       <br>
       <ion-button expand="block" (click)="login()">Login</ion-button>
       <br>
+      <h2 style="text-align: center;margin-top: 15px;margin-bottom: 10px;">No account yet ?</h2>
       <ion-button color="tertiary" expand="block" (click)="signUp()">Sign Up</ion-button>
     </ion-card-content>
   </ion-card>
 
   <ion-card *ngIf="connected">
     <ion-card-header>
-      <ion-card-title>Hello {{connecterUserEmail}}</ion-card-title>
+      <ion-card-title>Hello {{userFromMail(connecterUserEmail)}}</ion-card-title>
       <ion-card-subtitle>Your UID : {{connectedUserUid}}</ion-card-subtitle>
     </ion-card-header>
     
     <ion-card-content>
-      <br><ion-button color="danger" expand="block" (click)="logout()">Logout</ion-button>
     </ion-card-content>
   </ion-card>
 
+  <ion-card *ngIf="connected" (click)="connectToMarket()">
+    <ion-card-header>
+      <ion-card-title>Connect to Market</ion-card-title>
+      <ion-card-subtitle class="nfctext">Please, scan the NFC tag at the entrance</ion-card-subtitle>
+    </ion-card-header>
+      
+    <ion-card-content>
+      <img class="nfcimg" src="https://img.icons8.com/ios/50/000000/nfc-logo.png"/>
+      <div class="nfctext" *ngIf="connectedToMarket">
+        <p>Connected to the Market</p>
+      </div>       
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="connected">
+    <ion-card-header>
+      <ion-card-title>Items Taken</ion-card-title>
+      <ion-card-subtitle>This is your basket</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>content</p>      
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="connected">
+    <ion-card-header>
+      <ion-card-title>Special Offers</ion-card-title>
+      <ion-card-subtitle>Just for you</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>content</p>      
+    </ion-card-content>
+  </ion-card>
+<!-- 
   <ion-card *ngIf="connected">
     <ion-card-header>
       <ion-card-subtitle>Test Inser into</ion-card-subtitle>
@@ -61,6 +103,17 @@
   
     <ion-card-content>
       <ion-item *ngFor="let item of items | async"><div *ngIf='item.fromUser == connectedUserUid'>{{ item.text | json }}</div></ion-item>
+    </ion-card-content>
+  </ion-card> -->
+
+  <ion-card (click)=myAccount() *ngIf="connected">
+    <ion-card-header>
+      <ion-card-title>{{userFromMail(connecterUserEmail)}}, your account infos</ion-card-title>
+      <ion-card-subtitle>Click to see more...</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+
     </ion-card-content>
   </ion-card>
   

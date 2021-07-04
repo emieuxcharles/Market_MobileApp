@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+
+.nfctext{
+  text-align: center;
+  margin: 20px auto 0 auto;
+}
+
+.nfcimg {
+  filter:invert(100%);
+  display:flex;
+  margin: 0 auto 10px auto;
+  height: 30px;
+}
