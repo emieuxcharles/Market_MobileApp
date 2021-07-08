@@ -151,8 +151,10 @@ export class HomePage {
     console.log(this.productCounter)
     console.log(this.myProduct)
     //this.myProduct.push({})
-  
-    
+  }
+  clearBasket(){
+    this.myProduct = [];
+    this.productCounter = 0;
   }
 
   
