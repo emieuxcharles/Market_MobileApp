@@ -83,7 +83,12 @@
       <ion-card-subtitle>Just for you</ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <p>content</p>      
+      <div class="myProductGrid">
+        <div class="eachProduct" *ngFor="let i of buyLastWeek">
+          <h2>{{i.name}}</h2><img  src="{{i.url}}" alt="">
+          <div class="bandeau"><h2>-15%</h2></div>
+        </div>
+      </div>
     </ion-card-content>
   </ion-card>
 <!-- 

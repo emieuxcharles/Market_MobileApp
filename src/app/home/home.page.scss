@@ -52,6 +52,7 @@
 }
 
 .eachProduct{
+  position: relative;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -61,4 +62,15 @@
 }
 .cardProduct{
   padding: 50px!important;
+}
+
+.bandeau{
+  padding: 1px;
+  border-radius: 50%;
+  background-color: orange;
+  color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+
 }
